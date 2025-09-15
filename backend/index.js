@@ -4,6 +4,8 @@ import connectdb from "./config/connectdb.js";
 import cookieParser from "cookie-parser";
 import authRouter from "./route/authRoute.js";
 import cors from "cors";
+import userRouter from "./route/userRoute.js";
+
 dotenv.config();
 const app=express();
 app.use(cors({
@@ -13,6 +15,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 app.use("/api/auth",authRouter);
+app.use("/api/user",userRouter);
 
 
 const port=process.env.PORT || 8000;

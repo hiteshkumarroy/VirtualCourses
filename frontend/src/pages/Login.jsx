@@ -8,13 +8,15 @@ import axios from "axios";
 import {ClipLoader} from 'react-spinners';
 import {toast} from 'react-toastify';
 import {serverUrl} from '../App.jsx';
+import { useDispatch } from 'react-redux';
+import { setUserData } from '../redux/userSlice.js';
 
 function Login() {
 
 const navigate=useNavigate();
 
    const [show,setShow]=useState(false);
-
+const dispatch=useDispatch();
      const [email,setEmail]=useState("");
      const [password,setPassword]=useState("");
 
@@ -26,6 +28,7 @@ try{
   const result=await axios.post(serverUrl+'/api/auth/login',{
     email,password
   },{withCredentials:true});
+   dispatch(setUserData(result.data));
   console.log(result);
    setLoading(false);
   navigate('/')
