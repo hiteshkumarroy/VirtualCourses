@@ -1,11 +1,17 @@
 import React from 'react'
-
+import Nav from '../component/nav.jsx'
  function Home() {
-  console.log("hii");
+  // console.log("hii");
   return (
-    <div className='text-2xl text-[red]'>
+  <>
+  {/* <div></div> */}
+    <Nav/>
+
+    <div className=' text-2xl text-[red] pt-[60px]'>
+
       Home 
       </div>
+      </>
   )
 }
 
