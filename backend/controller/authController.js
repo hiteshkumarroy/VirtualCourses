@@ -2,6 +2,7 @@ import User from "../model/userModel.js";
 import validator from "validator";
 import bcrypt from "bcryptjs";
 import gentoken from "../config/token.js";
+import sendMail from "../config/sendMail.js";
 
 export const signUp=async(req,res)=>{
   try{
@@ -79,5 +80,62 @@ return res.status(200).json({message:"logout successfully"});
   }catch(error){
     return res.status(500).json({message:`logout error ${error}`});
     
+  }
+}
+
+export const sendOTP=async(req,res)=>{
+try{
+ 
+  const {email}=req.body;
+  const user=await User.findOne({email});
+  if(!user){
+  return res.status(404).json({message:"user not found"});
+  }
+  const otp=Math.floor(1000 + Math.random() * 9000).toString();
+  user.resetOtp=otp;
+  user.otpExpires=Date.now()+(5*60*60*1000);
+await user.save();
+await sendMail(email,otp);
+return res.status(200).json({message:"OTP sent successfully"});
+}catch(error){
+   return res.status(500).json({message:`send OTP error ${error}`});
+}
+}
+
+export const verifyOTP=async(req,res)=>{
+  try{
+    const {email,otp}=req.body;
+     const user=await User.findOne({email});
+    if(!user || user.resetOtp!=otp  || Date.now()>user.otpExpires){
+  return res.status(404).json({message:"Invalid OTP"});
+  }
+    user.resetOtp=undefined;
+  user.otpExpires=undefined;
+  user.isOtpVerified=true;
+
+  await user.save();
+return res.status(200).json({message:"OTP verified successfully"});
+  }catch(error){
+      return res.status(500).json({message:`verify OTP error ${error}`});
+  }
+}
+
+export const resetPassword=async(req,res)=>{
+  try{
+    // console.log("reset");
+    const {email, pass}=req.body;
+     const user=await User.findOne(({email}));
+     if(!user || !user.isOtpVerified){
+return res.status(404).json({message:"OTP verification required"});
+     }
+
+     const hashPass=await bcrypt.hash(pass,10);
+     user.password=hashPass;
+     user.isOtpVerified=false;
+     await user.save();
+     return res.status(200).json({message:"pass reset successfully"});
+
+  }catch(error){
+      return res.status(500).json({message:`reset password  error ${error}`});
   }
 }
