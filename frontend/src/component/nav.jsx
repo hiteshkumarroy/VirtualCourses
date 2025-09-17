@@ -55,7 +55,7 @@ setFirstLetter(user.userData.name.slice(0,1).toUpperCase());
         <img src={logo} width={40} alt="" className='  cursor-pointer border-1 shadow-2xl border-black rounded-md '/>
         </div>
 <div className='lg:flex md:flex  hidden'>
- {  firstLetter===""?<span className='mr-10  ' width={40} ><FaUser className='cursor-pointer inline text-white border-1 mb-1 border-black shadow-2xl   rounded-full p-1.5 bg-black'  size={35} /></span>
+ {  firstLetter===""?<span className='mr-10  ' width={40} ><FaUser className='cursor-pointer inline text-white border-1 mb-1 border-black shadow-2xl   rounded-full p-1.5 bg-black' onClick={()=>{setShowPcard(p=>!p)}} size={35} /></span>
 :
     <span className="cursor-pointer mr-10 inline-flex items-center justify-center w-9 h-9 text-white border border-black shadow-2xl rounded-full hover:bg-gray-800 bg-black" onClick={()=>{setShowPcard(p=>!p)}}>
               {firstLetter}
@@ -65,7 +65,7 @@ setFirstLetter(user.userData.name.slice(0,1).toUpperCase());
     showPcard && 
     <div className='top-[65px] rounded-2xl absolute w-40 border-2 border-black h-30 flex flex-col items-center justify-evenly'>
       
- <span className='cursor-pointer text-white  border-1 border-black shadow-2xl rounded-lg p-1.5 bg-black'   >My Profile</span>
+ <span className='cursor-pointer text-white  border-1 border-black shadow-2xl rounded-lg p-1.5 bg-black'  onClick={()=>{navigate('/profile')}} >My Profile</span>
  <span className='cursor-pointer text-white  border-1 border-black shadow-2xl rounded-lg p-1.5 bg-black'  >My Courses</span>
 
       </div>
@@ -94,7 +94,7 @@ setFirstLetter(user.userData.name.slice(0,1).toUpperCase());
 
   <GiCrossMark className='cursor-pointer absolute right-20 top-10 fill-white' size={35} onClick={()=>setShowHam(p=>!p)}/>
 
-    {  firstLetter===""?<span className='  ' width={40} ><FaUser className='cursor-pointer inline text-white border-1  border-white shadow-2xl   rounded-full p-1.5 bg-black'  size={35} /></span>
+    {  firstLetter===""?<span className='  ' width={40} ><FaUser className='cursor-pointer inline text-white border-1  border-white shadow-2xl   rounded-full p-1.5 bg-black' size={35} /></span>
 :
     <span className="cursor-pointer border-white p-5 inline-flex items-center justify-center w-9 h-9 text-white border  shadow-2xl rounded-full hover:bg-gray-800 bg-black" >
               {firstLetter}
@@ -118,7 +118,7 @@ setFirstLetter(user.userData.name.slice(0,1).toUpperCase());
   }
 
       
- <span className='cursor-pointer w-30 text-center text-white  border-1 border-white shadow-2xl rounded-lg p-2 bg-black'   >My Profile</span>
+ <span className='cursor-pointer w-30 text-center text-white  border-1 border-white shadow-2xl rounded-lg p-2 bg-black'  onClick={()=>{navigate('/profile')}} >My Profile</span>
  <span className='cursor-pointer w-30 text-center text-white  border-1 border-white shadow-2xl rounded-lg p-2 bg-black'  >My Courses</span>
 
 { user && 

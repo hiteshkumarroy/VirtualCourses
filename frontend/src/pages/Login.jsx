@@ -89,7 +89,7 @@ toast.error(error.response.data.message);
     handleLogin();
   }} disabled={loading}>{loading?<ClipLoader size={20} color={"white"}/>:"Login"}</button>
 
-   <span className='text-gray-700 cursor-pointer'>forgot password?</span>
+   <span className='text-gray-700 cursor-pointer' onClick={()=>navigate('/forget')}>forgot password?</span>
   
   {/* orcontinue */}
   <div className='flex justify-center items-center gap-2'>
