@@ -10,6 +10,8 @@ import {toast} from 'react-toastify';
 import {serverUrl} from '../App.jsx';
 import { useDispatch } from 'react-redux';
 import { setUserData } from '../redux/userSlice.js';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../utils/firebase.js';
 
 function SignUp() {
   const [show,setShow]=useState(false);
@@ -38,6 +40,26 @@ catch(error){
 toast.error(error.response.data);
  setLoading(false);
 }
+  }
+
+  const googleSignUp=async()=>{
+    try{
+      const response =await signInWithPopup(auth,provider);
+      let user=response.user;
+      let name=user.displayName;
+      console.log(name);
+      let email=user.email;
+      const result=await axios.post(serverUrl+'/api/auth/googleauth',{name,email,role},{withCredentials:true});
+      console.log(result);
+  dispatch(setUserData(result.data));
+  console.log(result);
+  //  setLoading(false);
+  navigate('/')
+toast.success("Signup successfully");
+
+    }catch(error){
+toast.error(error.response.data.message);
+    }
   }
   return (
     <div className='bg-gray-400 w-[100vw] h-[100vh] flex items-center justify-center'>
@@ -108,7 +130,8 @@ e.preventDefault()
 </div>
 
 {/* google */}
-<div className=' cursor-pointer border-2 p-0.5 border-gray-600 rounded-md flex justify-center'>
+<div className=' cursor-pointer border-2 p-0.5 border-gray-600 rounded-md flex justify-center'
+onClick={()=>{googleSignUp()}} >
 <img src={google} width={20} alt="" />
 <span>oogle</span>
 </div>

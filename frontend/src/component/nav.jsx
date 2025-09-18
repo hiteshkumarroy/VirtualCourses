@@ -39,6 +39,7 @@ toast.error(error);
 
     useEffect(()=>{
       if(user.userData){
+      console.log(user.userData.name )
 setFirstLetter(user.userData.name.slice(0,1).toUpperCase());
 }else{
   setFirstLetter("");
