@@ -47,46 +47,46 @@ setFirstLetter(user.userData.name.slice(0,1).toUpperCase());
     },[user])
  
   return (
-    <div className='fixed  w-[100%] h-[60px] bg-[#1f1d1d47] flex justify-center shadow-2xl'>
+    <div className='fixed z-50 w-[100%] h-[60px] bg-[#1f1d1d47] flex justify-center shadow-2xl'>
 
     <div className='w-[80%] flex 
     justify-between  items-center'>
 
       <div>
-        <img src={logo} width={40} alt="" className='  cursor-pointer border-1 shadow-2xl border-black rounded-md '/>
+        <img src={logo} width={40} alt="" className='  cursor-pointer border-1 shadow-2xl border-white rounded-md '/>
         </div>
 <div className='lg:flex md:flex  hidden'>
- {  firstLetter===""?<span className='mr-10  ' width={40} ><FaUser className='cursor-pointer inline text-white border-1 mb-1 border-black shadow-2xl   rounded-full p-1.5 bg-black' onClick={()=>{setShowPcard(p=>!p)}} size={35} /></span>
+ {  firstLetter===""?<span className='mr-10  ' width={40} ><FaUser className='cursor-pointer inline text-white border-1 mb-1 border-white shadow-2xl   rounded-full p-1.5 bg-black' onClick={()=>{setShowPcard(p=>!p)}} size={35} /></span>
 :
-    <span className="cursor-pointer mr-10 inline-flex items-center justify-center w-9 h-9 text-white border border-black shadow-2xl rounded-full hover:bg-gray-800 bg-black" onClick={()=>{setShowPcard(p=>!p)}}>
+    <span className="cursor-pointer mr-10 inline-flex items-center justify-center w-9 h-9 text-white border border-white shadow-2xl rounded-full hover:bg-gray-800 bg-black" onClick={()=>{setShowPcard(p=>!p)}}>
               {firstLetter}
             </span>
   }
   {
     showPcard && 
-    <div className='top-[65px] rounded-2xl absolute w-40 border-2 border-black h-30 flex flex-col items-center justify-evenly'>
+    <div className='top-[65px] rounded-2xl absolute w-40 border-2 border-white h-30 flex flex-col items-center justify-evenly'>
       
- <span className='cursor-pointer text-white  border-1 border-black shadow-2xl rounded-lg p-1.5 bg-black'  onClick={()=>{navigate('/profile')}} >My Profile</span>
- <span className='cursor-pointer text-white  border-1 border-black shadow-2xl rounded-lg p-1.5 bg-black'  >My Courses</span>
+ <span className='cursor-pointer text-white  border-1 border-white shadow-2xl rounded-lg p-1.5 bg-black'  onClick={()=>{navigate('/profile')}} >My Profile</span>
+ <span className='cursor-pointer text-white  border-1 border-white shadow-2xl rounded-lg p-1.5 bg-black'  >My Courses</span>
 
       </div>
 
   }
 
    
- { user && user.userData && user.userData.role==='educator' && <span className='cursor-pointer text-white mr-10 border-1 border-black shadow-2xl rounded-lg p-1.5 bg-black' width={40}  >dashboard</span>}
+ { user && user.userData && user.userData.role==='educator' && <span className='cursor-pointer text-white mr-10 border-1 border-white shadow-2xl rounded-lg p-1.5 bg-black' width={40}  >dashboard</span>}
  
 {
   user.userData?
-  <button type="submit" className='cursor-pointer bg-black shadow-2xl  text-[white] p-1 rounded-md  ' onClick={(e)=>{
+  <button type="submit" className='cursor-pointer bg-black border-1 border-white shadow-2xl  text-[white] p-1 rounded-md  ' onClick={(e)=>{
     e.preventDefault();
     handleLogout();
   }} disabled={loading}>{loading?<ClipLoader size={20} color={"white"}/>:"Logout"}</button>:
-  <span className='cursor-pointer text-white mr-10 border-1 border-black shadow-2xl  rounded-lg p-1.5 bg-black' onClick={()=>navigate('/login')}>login</span>}
+  <span className='cursor-pointer text-white mr-10 border-1 border-white shadow-2xl  rounded-lg p-1.5 bg-black' onClick={()=>navigate('/login')}>login</span>}
 
 </div>
 
-<RxHamburgerMenu  className='w-[35px] h-[35px] lg:hidden md:hidden fill-black cursor-pointer' onClick={()=>setShowHam(prev=>!prev)}  />
+<RxHamburgerMenu  className='w-[35px]   h-[35px] lg:hidden md:hidden fill-white text-white cursor-pointer' onClick={()=>setShowHam(prev=>!prev)}  />
 
  
     </div>
