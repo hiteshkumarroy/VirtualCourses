@@ -25,7 +25,7 @@ import Logos from '../component/logos.jsx';
   <Nav/>
 
 
-    <img src={home} className='object-cover md:object-fill w-[100%] lg:h-[100%] h-[50vh] overflow-hidden ' />
+    <img src={home} className='object-fill md:object-fill  w-[100%] lg:h-[100%] h-[50vh] overflow-hidden ' />
     
      
       <div className='absolute  text-[white] lg-top-[10%] top-[15%] lg:text-[70px] md:text-[40px] text-[20px] flex items-center justify-center overflow-hidden font-bold text-center w-[100vw]'>

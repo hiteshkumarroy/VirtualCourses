@@ -47,7 +47,7 @@ setFirstLetter(user.userData.name.slice(0,1).toUpperCase());
     },[user])
  
   return (
-    <div className='fixed z-50 w-[100%] h-[60px] bg-[#1f1d1d47] flex justify-center shadow-2xl'>
+    <div className='fixed z-50 w-[100%] h-[60px] bg-[#1f1d1d48] flex justify-center shadow-2xl'>
 
     <div className='w-[80%] flex 
     justify-between  items-center'>
