@@ -13,7 +13,7 @@ function Profile() {
         <FaArrowLeftLong className='absolute top-5 left-5 cursor-pointer' size={20} onClick={()=>{navigate('/')}}/>
         <div className='flex justify-center mt-10 items'>
 {
-  userData?.photoUrl?<img src={userData.photoUrl} className='w-[35px] h-[35px] rounded-full' alt="img" />:
+  userData?.photoUrl?<img src={userData.photoUrl} className='w-[60px] h-[60px] border-1 rounded-full' alt="img" />:
   <div className='w-[60px] h-[60px] rounded-full bg-black text-white flex justify-center items-center'>
     {userData.name.slice(0,1)}
   </div>
@@ -61,7 +61,7 @@ function Profile() {
 </div>
 
 <div className='mt-5 flex justify-center items-center'>
-<button className='bg-black rounded-xl cursor-pointer text-white px-2 py-1' onClick={()=>{navigate('/editprofile')}}> Edit Profile</button>
+<button className='bg-black rounded-xl cursor-pointer text-white px-2 py-1 transform active:bg-gray-600' onClick={()=>{navigate('/editprofile')}}> Edit Profile</button>
 </div>
 
       </div>
