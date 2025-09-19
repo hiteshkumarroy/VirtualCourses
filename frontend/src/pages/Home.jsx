@@ -35,7 +35,7 @@ import Logos from '../component/logos.jsx';
       Your Career path
     </div>
 
-      <div className='absolute  lg:text-[white] lg:top-[40%] top-[75%] md:top-[80%]  w-[100%] flex justify-center gap-3 flex-wrap'>
+      <div className='absolute  lg:text-[white] lg:top-[36%] top-[75%] md:top-[80%]  w-[100%] flex justify-center gap-3 flex-wrap'>
 
       <button className='border-1 lg:bg-black flex gap-2 justify-center hover:text-white hover:bg-black items-center cursor-pointer lg:border-white border-black rounded-md px-[10px] lg:hover:text-black lg:hover:bg-white  py-[8px]'>View All Courses 
         <BsGooglePlay className='inline  ' size={15} />
