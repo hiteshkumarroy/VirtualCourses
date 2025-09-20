@@ -100,7 +100,9 @@ setFirstLetter(user.userData.name.slice(0,1).toUpperCase());
   }
 
    
- { user && user.userData && user.userData.role==='educator' && <span className='cursor-pointer text-white mr-10 border-1 border-white shadow-2xl rounded-lg p-1.5 bg-black' width={40}  >dashboard</span>}
+ { user && user.userData && user.userData.role==='educator' && <span className='cursor-pointer text-white mr-10 border-1 border-white shadow-2xl rounded-lg p-1.5 bg-black' width={40} onClick={()=>{
+  navigate('/dashboard')
+}}   >dashboard</span>}
  
 {
   user.userData?
@@ -173,7 +175,9 @@ setFirstLetter(user.userData.name.slice(0,1).toUpperCase());
 user.userData && 
 user.userData.role==='educator' 
 && 
-<span className='cursor-pointer w-30 text-center text-white  border-1 border-white shadow-2xl rounded-lg p-2 bg-black' width={40}  >Dashboard</span>}
+<span className='cursor-pointer w-30 text-center text-white  border-1 border-white shadow-2xl rounded-lg p-2 bg-black' width={40} onClick={()=>{
+  navigate('/dashboard')
+}}  >Dashboard</span>}
 
       
 
