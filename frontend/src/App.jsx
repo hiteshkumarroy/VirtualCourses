@@ -14,6 +14,7 @@ import ForgetPass from './pages/ForgetPass.jsx'
 import EditProfile from './pages/EditProfile.jsx'
 import Dashboard from './pages/educator/Dashboard.jsx'
 import Courses from './pages/educator/Courses.jsx'
+import CreateCourses from './pages/educator/CreateCourses.jsx'
 
 function App() {
 const user=getCurrentUser();
@@ -38,6 +39,7 @@ const {userData}=useSelector(state=>state.user);
   <Route path='/dashboard' element={userData?.role=="educator"?<Dashboard/>:<Navigate to={'/signup'}/> }/>
 
   <Route path='/courses' element={userData?.role=="educator"?<Courses/>:<Navigate to={'/signup'}/> }/>
+  <Route path='/createcourses' element={userData?.role=="educator"?<CreateCourses/>:<Navigate to={'/signup'}/> }/>
 
 </Routes>
   
