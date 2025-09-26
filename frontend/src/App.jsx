@@ -15,9 +15,11 @@ import EditProfile from './pages/EditProfile.jsx'
 import Dashboard from './pages/educator/Dashboard.jsx'
 import Courses from './pages/educator/Courses.jsx'
 import CreateCourses from './pages/educator/CreateCourses.jsx'
+import getCreatorCourse from './customHooks/getCreatorCourse.js'
 
 function App() {
 const user=getCurrentUser();
+getCreatorCourse();
 const {userData}=useSelector(state=>state.user);
 
   return (

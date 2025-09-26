@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import authRouter from "./route/authRoute.js";
 import cors from "cors";
 import userRouter from "./route/userRoute.js";
+import courseRouter from "./route/courseRouter.js";
 
 dotenv.config();
 const app=express();
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/api/auth",authRouter);
 app.use("/api/user",userRouter);
+app.use("/api/course",courseRouter);
 
 
 const port=process.env.PORT || 8000;

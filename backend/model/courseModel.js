@@ -1,4 +1,4 @@
-import mongoose from 'mongooose';
+import mongoose from 'mongoose';
 const courseSchema=new mongoose.Schema({
   title:{
     type:String,

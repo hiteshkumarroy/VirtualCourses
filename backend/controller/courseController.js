@@ -1,5 +1,5 @@
-import uploadOnCloudinary from "../config/cloudinary";
-import Course from "../model/courseModel";
+import uploadOnCloudinary from "../config/cloudinary.js";
+import Course from "../model/courseModel.js";
 
 
 

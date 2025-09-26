@@ -1,12 +1,41 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 import { FaArrowLeftLong } from 'react-icons/fa6'
 import { useNavigate } from 'react-router-dom'
+import { serverUrl } from '../../App';
+import { toast } from 'react-toastify';
+import { ClipLoader } from 'react-spinners';
+import { useDispatch, useSelector } from 'react-redux';
+import getCreatorCourse from '../../customHooks/getCreatorCourse';
+import { setCreatorCourseData } from '../../redux/courseSlice';
 
 function CreateCourses() {
   const navigate=useNavigate();
   const [title,SetTitle]=useState("");
   const [category,setCategory]=useState("");
   const [loading,setLoading]=useState(false);
+  const dispatch=useDispatch();
+
+  const creatorCourses=useSelector(state=>state.course.creatorCourseData);
+
+  const handleCreateCourse=async()=>{
+    try {
+      setLoading(true);
+      const response=await axios.post(serverUrl+'/api/course/createcourse',{title,category},{withCredentials:true});
+      console.log(response);
+      toast.success("course created")
+      setLoading(false);
+     dispatch(setCreatorCourseData([response.data, ...creatorCourses]));
+
+      console.log(creatorCourses);
+       navigate('/courses')
+    } catch (error) {
+      toast.error(`Create Course error ${error}`);
+      console.log(error);
+      setLoading(false);
+     
+    }
+  }
   return (
     <div className='h-[100vh] w-[100vw] flex items-center justify-center bg-gray-100'>
       
@@ -50,7 +79,12 @@ setCategory(e.target.value);
 
 </div>
 
- <button type="submit" className='cursor-pointer bg-black text-white p-1 active:bg-gray-600 rounded-md'> Create</button>
+ <button type="submit" className='cursor-pointer bg-black text-white p-1 active:bg-gray-600 rounded-md' disabled={loading} onClick={(e)=>{
+  e.preventDefault();
+  handleCreateCourse();
+ }}> 
+ 
+{loading?<ClipLoader size={20} color={"white"}/>:"Create"}</button>
 
 
      </div>
