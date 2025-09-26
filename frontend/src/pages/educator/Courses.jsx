@@ -26,47 +26,38 @@ function Courses() {
 
         <div className='mt-[3%] hidden sm:block shadow-2xl  mx-auto rounded-xl bg-white h-[100%] w-[90%] pb-[20px]'>
 <table className='w-[90%] mx-auto mt-[15px]'>
-  
-  <tr className='flex justify-between p-5'>
-    <div className='w-[50%]'>
-    <th>Courses</th></div>
-    <div className='flex justify-between w-[50%]'>
-    <th> Price</th>
-    <th>status</th>
-    <th>Action</th></div>
-  </tr>
-
-  <hr className='mt-3' />
-
-   <tr className='flex border-b hover:bg-gray-100 transition-duration-200 justify-between h-[80px] items-center p-5'>
-    <div>
-    <td className='flex gap-5 items-center'>
-      <img src={pi}  className='w-[100px] rounded-md h-[50px] object-cover' alt="" />
-      <span className='font-medium'>
-        Complete HTML Course
-      </span>
-
-    </td>
-    </div>
-
-    <div className='flex justify-between w-[50%]'>
-    <td className='font-medium'>₹199 </td>
-
-    <td >
-      <span className='py-[2px] text-[13px] px-[10px] bg-green-200 text-green-700 rounded-2xl'>published</span>
-    </td>
-    <td>
-      <FaEdit className='text-gray-600 hover:text-blue-600 cursor-pointer' />
+  <thead className='border-b'>
+    <tr className='flex justify-between p-5'>
+      <th className='w-[50%] text-left'>Courses</th>
+      <th className='flex justify-between w-[50%]'>
+        <span>Price</span>
+        <span>Status</span>
+        <span>Action</span>
+      </th>
+    </tr>
+  </thead>
+  {/* <hr className='mt-3' /> */}
+  <tbody>
+    <tr className='flex border-b hover:bg-gray-100 transition-duration-200 justify-between h-[80px] items-center p-5'>
+      <td className='w-[50%]'>
+        <div className='flex gap-5 items-center'>
+          <img src={pi} className='w-[100px] rounded-md h-[50px] object-cover' alt="" />
+          <span className='font-medium'>
+            Complete HTML Course
+          </span>
+        </div>
       </td>
-      </div>
-  </tr>
-  
-
-
-  {/* <hr /> */}
-
-
-  {/* <hr /> */}
+      <td className='flex justify-between w-[50%]'>
+        <span className='font-medium'>₹199</span>
+        <span>
+          <span className='py-[2px] text-[13px] px-[10px] bg-green-200 text-green-700 rounded-2xl'>published</span>
+        </span>
+        <span>
+          <FaEdit className='text-gray-600 hover:text-blue-600 cursor-pointer' />
+        </span>
+      </td>
+    </tr>
+  </tbody>
 </table>
 <p className='text-center text-sm mt-6 text-gray-400'>
   A list of your recent courses
