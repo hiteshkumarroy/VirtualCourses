@@ -15,6 +15,7 @@ function EditCourse() {
   const {courseid}=useParams();
   const [selectedCourse,setSelectedCourse]=useState(null);
   const [loading,setLoading]=useState(false);
+  const [loading1,setLoading1]=useState(false);
   const [title,setTitle]=useState("");
   const [subtitle,setSubtitle]=useState("");
   const [description,setDescription]=useState("");
@@ -100,6 +101,22 @@ try {
 }
 }
 
+//handle remove course
+const handleRemoveCourse=async()=>{
+  try {
+    setLoading1(true);
+    const result=await axios.delete(serverUrl+`/api/course/deleteCourse/${courseid}`,{withCredentials:true});
+    console.log(result.data);
+    setLoading1(false);
+    toast.success("Course Removed");
+    navigate('/courses');
+  } catch (error) {
+    console.log(error);
+    setLoading1(false);
+    toast.error(`Course remove error ${error.response.data.message}`);
+  }
+}
+
   return (
 <div className='max-w-screen mx-auto overflow-hidden bg-gray-100'>
   <div className='space-y-2  mx-auto  rounded-xl w-[90%] mt-[3%] bg-white p-5 shadow-2xl'>
@@ -142,10 +159,12 @@ Basic Course information
  }}> 
  Click To Publish
 </button>}
- <button type="submit" className='cursor-pointer bg-red-900 text-white font-medium px-3 py-1 text-[12px] active:bg-red-500 rounded-md border-1 border-red-600' onClick={(e)=>{
+ <button type="submit" className='cursor-pointer w-[108px] bg-red-900 text-white font-medium px-3 py-1 text-[12px] active:bg-red-500 rounded-md border-1 border-red-600' onClick={(e)=>{
   e.preventDefault();
+  handleRemoveCourse();
  }}> 
- Remove Course
+ {loading1?<ClipLoader color='white' size={15}/>:" Remove Course"}
+
 </button>
 </div>
 </div>

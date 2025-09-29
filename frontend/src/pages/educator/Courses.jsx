@@ -20,7 +20,7 @@ function Courses() {
         
         <div className='overflow-hidden  mt-[5%] space-y-2 w-[90%] mx-auto sm:flex sm:justify-between '>
            
-<span className='flex gap-2 text-xl font-semibold'>
+<span className='flex gap-2 text-xl items-center font-semibold'>
  <FaArrowLeftLong className=' cursor-pointer' size={20} onClick={()=>{navigate('/dashboard')}}/>
   All Created Courses</span>
 <span> <button className='bg-black max-w-[150px] rounded-xl cursor-pointer text-white px-2 py-1 transform active:bg-gray-600' onClick={()=>{navigate('/createcourses')}}> Create Course</button></span>

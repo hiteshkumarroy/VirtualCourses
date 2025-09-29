@@ -17,9 +17,11 @@ import Courses from './pages/educator/Courses.jsx'
 import CreateCourses from './pages/educator/CreateCourses.jsx'
 import getCreatorCourse from './customHooks/getCreatorCourse.js'
 import EditCourse from './pages/educator/EditCourse.jsx'
+import { getPublishedCourse } from './customHooks/getPublishedCourse.js'
 
 function App() {
 const user=getCurrentUser();
+getPublishedCourse();
 getCreatorCourse();
 const {userData}=useSelector(state=>state.user);
 
