@@ -16,6 +16,7 @@ import Dashboard from './pages/educator/Dashboard.jsx'
 import Courses from './pages/educator/Courses.jsx'
 import CreateCourses from './pages/educator/CreateCourses.jsx'
 import getCreatorCourse from './customHooks/getCreatorCourse.js'
+import EditCourse from './pages/educator/EditCourse.jsx'
 
 function App() {
 const user=getCurrentUser();
@@ -42,6 +43,7 @@ const {userData}=useSelector(state=>state.user);
 
   <Route path='/courses' element={userData?.role=="educator"?<Courses/>:<Navigate to={'/signup'}/> }/>
   <Route path='/createcourses' element={userData?.role=="educator"?<CreateCourses/>:<Navigate to={'/signup'}/> }/>
+  <Route path='/editcourse/:courseid' element={userData?.role=="educator"?<EditCourse/>:<Navigate to={'/signup'}/> }/>
 
 </Routes>
   

@@ -12,11 +12,11 @@ function Courses() {
   console.log(creatorCourses);
   return (
     
-      <div className='   bg-gray-100 flex  
-    flex-col sm:items-center w-[100vw]'>
+      <div className='max-w-screen  bg-gray-100 flex  
+    flex-col sm:items-center '>
         {/* upperdiv */}
         
-        <div className='mt-[5%] space-y-2 w-[90%] mx-auto sm:flex sm:justify-between '>
+        <div className='overflow-hidden  mt-[5%] space-y-2 w-[90%] mx-auto sm:flex sm:justify-between '>
            
 <span className='flex gap-2 text-xl font-semibold'>
  <FaArrowLeftLong className=' cursor-pointer' size={20} onClick={()=>{navigate('/dashboard')}}/>
@@ -27,7 +27,7 @@ function Courses() {
 
         {/* lowerdiv */}
 
-        <div className='mt-[3%] hidden sm:block shadow-2xl  mx-auto rounded-xl bg-white h-[100%] w-[90%] pb-[20px]'>
+        <div className=' mt-[3%] hidden sm:block shadow-2xl  mx-auto rounded-xl bg-white h-[100%] w-[90%] pb-[20px]'>
 
 <table className='w-[90%] mx-auto mt-[15px]'>
 
@@ -63,7 +63,7 @@ function Courses() {
           <span className='py-[2px] text-[13px] px-[10px] bg-red-100 text-red-700 rounded-2xl'>Draft</span>}
         </span>
         <span>
-          <FaEdit className='text-gray-600 hover:text-blue-600 cursor-pointer' />
+          <FaEdit className='text-gray-600 hover:text-blue-600 cursor-pointer' onClick={()=>{navigate(`/editcourse/${course._id}`)}}/>
         </span>
       </td>
     </tr>
@@ -78,23 +78,25 @@ function Courses() {
 
 {/* lowerdiv for small devices*/}
   {
-    creatorCourses.map((course)=>
+    creatorCourses.map((course,index)=>
  { 
-return <div className='sm:hidden space-y-4 mt-5 mx-auto shadow-2xl rounded-xl bg-white h-[100%] w-[90%] p-[20px]'>
+return <div key={index} className='sm:hidden space-y-4 mt-5 mx-auto shadow-2xl rounded-xl bg-white h-[100%] w-[90%] p-[20px]'>
  <div> <div className='flex gap-4 items-center'>
     <img src={course.thumbnail || pi} alt="image" className='w-16 h-16 rounded-md object-cover'  />
     <div className='flex-1'>
       <h2 className='font-medium text-sm'> { course.title?course.title:"title"}</h2>
       <p className='text-gray-600 text-xs mt-1'> {course.price?`₹${course.price}`:"₹NA"}</p>
     </div>
-        <FaEdit className='cursor-pointer hover:text-blue-600 text-gray-600'/>
+        <FaEdit className='cursor-pointer hover:text-blue-600 text-gray-600'
+        onClick={()=>{navigate(`/editcourse/${course._id}`)}}
+        />
   </div>
 {
   !course.isPublished?<span className='w-fit px-3 py-1 text-xs rounded-full bg-red-100 text-red-600'>Draft</span>:
   <span className='w-fit px-3 py-1 text-xs rounded-full bg-green-100 text-green-600'>published</span>}
  </div> 
  </div>})}
-<p className='text-center pl-[80px] text-sm mt-4 text-gray-400'>
+<p className='text-center pl-[80px] sm:hidden text-sm mt-4 text-gray-400'>
   A list of your recent courses
 </p>
  
