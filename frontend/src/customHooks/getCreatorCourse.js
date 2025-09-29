@@ -15,7 +15,7 @@ export default function getCreatorCourse() {
         const result = await axios.get(serverUrl + '/api/course/getcreatorcourse', { 
           withCredentials: true 
         });
-        console.log(result.data);
+        // console.log(result.data);
         dispatch(setCreatorCourseData(result.data));
       } catch (error) {
         console.log(error);

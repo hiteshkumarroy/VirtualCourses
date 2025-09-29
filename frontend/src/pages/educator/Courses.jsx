@@ -4,12 +4,14 @@ import { FaEdit } from "react-icons/fa";
 import pi from '../../assets/empty.jpg'
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import getCreatorCourse from '../../customHooks/getCreatorCourse';
 
 
 function Courses() {
   const navigate=useNavigate();
+  getCreatorCourse();
   const creatorCourses=useSelector(state=>state.course.creatorCourseData);
-  console.log(creatorCourses);
+
   return (
     
       <div className='max-w-screen  bg-gray-100 flex  
@@ -59,7 +61,7 @@ function Courses() {
       <td className='flex justify-between w-[50%]'>
         <span className='text-gray-600 font-medium'>{course.price?`₹${course.price}`:"₹NA"}</span>
         <span>
-        {  course.isPublished?<span className='py-[2px] text-[13px] px-[10px] bg-green-200 text-green-700 rounded-2xl'>published</span>:
+        {  course.isPublished?<span className='py-[2px] text-[13px] px-[10px] bg-green-100 text-green-700 rounded-2xl'>published</span>:
           <span className='py-[2px] text-[13px] px-[10px] bg-red-100 text-red-700 rounded-2xl'>Draft</span>}
         </span>
         <span>
@@ -81,7 +83,8 @@ function Courses() {
     creatorCourses.map((course,index)=>
  { 
 return <div key={index} className='sm:hidden space-y-4 mt-5 mx-auto shadow-2xl rounded-xl bg-white h-[100%] w-[90%] p-[20px]'>
- <div> <div className='flex gap-4 items-center'>
+ <div> 
+  <div className='flex gap-5 mb-4 items-center'>
     <img src={course.thumbnail || pi} alt="image" className='w-16 h-16 rounded-md object-cover'  />
     <div className='flex-1'>
       <h2 className='font-medium text-sm'> { course.title?course.title:"title"}</h2>
@@ -91,9 +94,10 @@ return <div key={index} className='sm:hidden space-y-4 mt-5 mx-auto shadow-2xl r
         onClick={()=>{navigate(`/editcourse/${course._id}`)}}
         />
   </div>
+
 {
-  !course.isPublished?<span className='w-fit px-3 py-1 text-xs rounded-full bg-red-100 text-red-600'>Draft</span>:
-  <span className='w-fit px-3 py-1 text-xs rounded-full bg-green-100 text-green-600'>published</span>}
+  !course.isPublished?<span className='w-fit px-3 py-1 text-xs  rounded-full bg-red-100 text-red-600'>Draft</span>:
+  <span className='w-fit px-3 py-1 text-xs rounded-full bg-green-100  text-green-600'>published</span>}
  </div> 
  </div>})}
 <p className='text-center pl-[80px] sm:hidden text-sm mt-4 text-gray-400'>

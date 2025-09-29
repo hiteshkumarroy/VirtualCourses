@@ -52,13 +52,15 @@ export const getCreatorCourses = async(req,res)=>{
 
 export const editCourse=async (req,res)=>{
 try{
+ 
 const {courseId}=req.params;
+
 const {title,subTitle,description,category,level,isPublished,price}=req.body;
 let thumbnail
 if(req.file){
   thumbnail=await uploadOnCloudinary(req.file.path);
 }
-let course=await Course.findById({courseId});
+let course=await Course.findById(courseId);
 
 if(!course){
  return res.status(400).json({message:"Courses not found"});
@@ -71,7 +73,7 @@ const response=await Course.findByIdAndUpdate(courseId,updateData,{new:true});
  return res.status(201).json(response);
 
 }catch(error){
-
+console.log(error);
  return res.status(400).json({message:`failed to  edit course ${error}`});
 }
 }
