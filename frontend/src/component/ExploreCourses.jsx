@@ -7,9 +7,11 @@ import { Si365Datascience, SiHackaday } from 'react-icons/si';
 import { GiArtificialIntelligence } from 'react-icons/gi';
 import { DiGoogleAnalytics } from "react-icons/di";
 import { PiWebhooksLogoFill } from "react-icons/pi";
+import { useNavigate } from 'react-router-dom';
 
 
 function ExploreCourses() {
+        const navigate=useNavigate();
   return (
     <div className="w-[80%]  mx-auto flex flex-col lg:flex-row justify-center items-center mt-16 gap-10">
       {/* //left */}
@@ -21,7 +23,7 @@ function ExploreCourses() {
           consectetur adipisicing elit. Aut officia sint fuga repudiandae deserunt nemo. Aliquam officia ab, odio quae illo 
         </div>
 
-<button className='border-1 mt-10 bg-black flex gap-2 justify-center text-white items-center cursor-pointer border-white  rounded-md px-[10px] hover:text-black hover:bg-gray-400  py-[8px]'>Explore Courses 
+<button className='border-1 mt-10 bg-black flex gap-2 justify-center text-white items-center cursor-pointer border-white  rounded-md px-[10px] hover:text-black hover:bg-gray-400  py-[8px]' onClick={()=>navigate('/allcourses')}>Explore Courses 
         <BsGooglePlay className='inline  ' size={15} />
       </button>
 

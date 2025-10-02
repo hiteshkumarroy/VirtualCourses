@@ -7,8 +7,10 @@ import aiS from '../assets/ai.png';
 import Logos from '../component/logos.jsx';
 import ExploreCourses from '../component/ExploreCourses.jsx';
 import CardPage from '../component/CardPage.jsx';
+import { useNavigate } from 'react-router-dom';
  function Home() {
   // console.log("hii");
+  const navigate=useNavigate();
     const [imageSrc, setImageSrc] = useState(ai);
 
   const handleMouseEnter = () => {
@@ -39,7 +41,7 @@ import CardPage from '../component/CardPage.jsx';
 
       <div className='absolute  lg:text-[white] lg:top-[36%] top-[75%] md:top-[80%]  w-[100%] flex justify-center gap-3 flex-wrap'>
 
-      <button className='border-1 lg:bg-black flex gap-2 justify-center hover:text-white hover:bg-black items-center cursor-pointer lg:border-white border-black rounded-md px-[10px] lg:hover:text-black lg:hover:bg-white  py-[8px]'>View All Courses 
+      <button className='border-1 lg:bg-black flex gap-2 justify-center hover:text-white hover:bg-black items-center cursor-pointer lg:border-white border-black rounded-md px-[10px] lg:hover:text-black lg:hover:bg-white  py-[8px]' onClick={()=>navigate('/allcourses')}>View All Courses 
         <BsGooglePlay className='inline  ' size={15} />
       </button>
       <button className='border-1 flex lg:bg-black bg-black text-white gap-2 justify-center items-center cursor-pointer lg:border-white border-black hover:text-black hover:bg-white rounded-md px-[10px] lg:hover:text-black lg:hover:bg-white  py-[8px]'
