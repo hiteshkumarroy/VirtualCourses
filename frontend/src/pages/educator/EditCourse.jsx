@@ -7,8 +7,12 @@ import { MdEdit } from "react-icons/md";
 import { serverUrl } from '../../App';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPublishedCourseData } from '../../redux/courseSlice';
 
 function EditCourse() {
+  const dispatch=useDispatch();
+  const {publishedCourseData}=useSelector(state=>state.course);
   const navigate=useNavigate();
   const [isPublished,setIsPublished]=useState(false);
   const imgRef=useRef();
@@ -93,6 +97,27 @@ try {
   navigate('/courses');
   setLoading(false);
  toast.success("course Updated");
+ const updatedData=result.data;
+
+ if(updatedData.isPublished){
+  const updatedCourses=publishedCourseData.map((c)=>{
+    return c._id===courseid?updatedData:c;
+  })
+
+  
+  if(!updatedCourses.find(c=>c._id===courseid)){
+    updatedCourses.push(updatedData);
+  }
+  dispatch(setPublishedCourseData(updatedCourses));
+ }
+ else{
+   const updatedCourses=publishedCourseData.filter((c)=>{
+    return c._id!==courseid;
+  })
+  dispatch(setPublishedCourseData(updatedCourses));
+ }
+
+
   
 } catch (error) {
   console.log(error);
@@ -106,10 +131,17 @@ const handleRemoveCourse=async()=>{
   try {
     setLoading1(true);
     const result=await axios.delete(serverUrl+`/api/course/deleteCourse/${courseid}`,{withCredentials:true});
-    console.log(result.data);
+    // console.log(result.data);
     setLoading1(false);
     toast.success("Course Removed");
     navigate('/courses');
+
+    const filteredCourses=publishedCourseData.filter((course)=>{
+     return  course._id!=courseid
+
+    })
+    dispatch(setPublishedCourseData(filteredCourses));
+// console.log(publishedCourseData);
   } catch (error) {
     console.log(error);
     setLoading1(false);

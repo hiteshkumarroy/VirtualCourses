@@ -5,16 +5,16 @@ import { getPublishedCourse } from '../customHooks/getPublishedCourse';
 
 function CardPage() {
   //  useEffect(()=>{
-getPublishedCourse();
+// getPublishedCourse();
   // },[])
 
   const {publishedCourseData}=useSelector(state=>state.course);
   const [popularCourses,setPopularCourses]=useState([]);
 
   useEffect(()=>{
-    if(publishedCourseData){
-      console.log("hii ",publishedCourseData)
-    setPopularCourses(publishedCourseData.slice(0,6));}
+   
+    setPopularCourses(publishedCourseData?.slice(0,6));
+  // }
   },[publishedCourseData]);
 
  
@@ -31,7 +31,7 @@ getPublishedCourse();
 
 
       {
-        popularCourses.map((course,index)=>{
+        popularCourses?.map((course,index)=>{
           console.log("inmap");
 return <Card className='cursor-pointer' key={index} thumbnail={course.thumbnail} title={course.title} category={course.category} price={course.price} id={course._id} />
         })
