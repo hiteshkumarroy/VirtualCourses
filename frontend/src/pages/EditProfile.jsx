@@ -92,7 +92,7 @@ setLoading(false);
        <label  htmlFor="description" className='font-medium'>Description</label>
        <textarea
        name='description'
-        className='border-1  text-gray-700 text-[15px] rounded-lg p-1 pl-3  ' type="textarea" id='description' 
+        className='border-1 resize-none text-gray-700 text-[15px] rounded-lg p-1 pl-3  ' type="textarea" id='description' 
       placeholder="tell us about yourself" 
       onChange={(e)=>{setdescription(e.target.value)}}
       value={description}

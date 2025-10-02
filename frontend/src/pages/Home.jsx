@@ -6,6 +6,7 @@ import ai from '../assets/searchAi.png';
 import aiS from '../assets/ai.png';
 import Logos from '../component/logos.jsx';
 import ExploreCourses from '../component/ExploreCourses.jsx';
+import CardPage from '../component/CardPage.jsx';
  function Home() {
   // console.log("hii");
     const [imageSrc, setImageSrc] = useState(ai);
@@ -55,6 +56,7 @@ import ExploreCourses from '../component/ExploreCourses.jsx';
     </div>
     <Logos></Logos>
     <ExploreCourses/>
+    <CardPage/>
 
       </div>
     
