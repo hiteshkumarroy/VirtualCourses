@@ -12,10 +12,11 @@ function AllCourses() {
   const {publishedCourseData}=useSelector(state=>state.course);
 const [category,setCategory]=useState([]);
 const [filteredCourses,setFilteredCourses]=useState([]);
+const [showSide,setShowSide]=useState(false);
 
 //to maintian category state
 const toggleCategory=(e)=>{
-console.log(e.target.value)
+
 if(category.includes(e.target.value)){
   setCategory(prev=>prev.filter(c=>c!==e.target.value))
 }
@@ -27,14 +28,18 @@ else{
 
 // to maintain filtered courses data
 const applyFilter=()=>{
+  
   let courseCopy=publishedCourseData?.slice();
+
   if(category.length>0){
 
     courseCopy=courseCopy.filter((c)=>{
       return category.includes(c.category)
     });
-setFilteredCourses(courseCopy);
+
   }
+  
+setFilteredCourses(courseCopy);
 }
 
 // set initialdata
@@ -45,16 +50,22 @@ useEffect(()=>{
 
 //maintaininfiltered courses on change of category state
 useEffect(()=>{
-  if(category.length>0)
- { applyFilter();}else{
-   setFilteredCourses(publishedCourseData);
- }
+  
+  applyFilter();
+
+ 
 },[category]);
+
 
   return (
     <div className='flex min-h-screen bg-gray-50'>
+      <button className='fixed left-4 text-center w-25 cursor-pointer top-18 z-50 border-1 px-1 rounded-md bg-white md:hidden text-black'
+       onClick={()=>setShowSide((prev)=>!prev)}>{ showSide?"Hide":"Show"} Filters </button>
       <Nav/>
-      <aside className='w-[260px] h-screen p-6 py-[110px] overflow-hidden bg-black fixed shadow-md top-0 left-0  border-r border-gray-200 transition-transform duration-300 z-5'>
+
+      <aside className={`w-[260px] h-screen p-6 transform py-[110px] overflow-hidden bg-black fixed shadow-md top-0 left-0  border-r border-gray-200 transition-transform duration-300 z-5
+${showSide?"translate-x-0":"-translate-x-full"} md:block md:translate-x-0 
+      `}>
 <h2 className='text-white flex gap-3 items-center '>
   <FaArrowLeftLong className='cursor-pointer' onClick={()=>navigate('/')} size={30}/>
   Filter by Category</h2>

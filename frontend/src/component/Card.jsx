@@ -7,7 +7,7 @@ function Card({thumbnail,title,category,price,id}) {
 
   return (
     <div className='max-w-[18rem] cursor-pointer w-full bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-300'>
-<img src={thumbnail} alt="img" className='  w-full h-40 object-'/>
+<img src={thumbnail} alt="img" className='  w-full h-35 object-'/>
 
 <div className='p-5 space-y-2'>
 
