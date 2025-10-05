@@ -51,6 +51,7 @@ const {userData}=useSelector(state=>state.user);
   <Route path='/editcourse/:courseid' element={userData?.role=="educator"?<EditCourse/>:<Navigate to={'/signup'}/> }/>
   
   <Route path='/createlecture/:courseid' element={userData?.role=="educator"?<CreateLecture/>:<Navigate to={'/signup'}/> }/>
+  {/* <Route path='/createlecture/:courseid' element={userData?.role=="educator"?<CreateLecture/>:<Navigate to={'/signup'}/> }/> */}
 
 </Routes>
   

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-const lectureSchema=mongoose.Schema({
+
+const lectureSchema=new mongoose.Schema({
   lectureTitle:{
     type:String,
     required:true,

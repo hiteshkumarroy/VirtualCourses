@@ -30,7 +30,7 @@ const courseSchema=new mongoose.Schema({
   }],
   lectures:[{
     type:mongoose.Schema.Types.ObjectId,
-    ref:"Lectures"
+    ref:"Lecture"
   }],
   creator:{
     type:mongoose.Schema.Types.ObjectId,

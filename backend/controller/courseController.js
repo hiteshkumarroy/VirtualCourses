@@ -114,6 +114,7 @@ export const deleteCourse=async (req,res)=>{
 //to create new lectures
 export const createLecture=async(req,res)=>{
   try {
+    // console.log("woww")
   const  {lectureTitle}=req.body;
   const {courseId}=req.params;
   if(!lectureTitle || !courseId){
