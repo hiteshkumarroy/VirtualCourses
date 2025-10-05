@@ -16,6 +16,7 @@ function CreateLecture() {
   const dispatch=useDispatch();
   const {lectureData}=useSelector(state=>state.lecture);
 
+
 const handleCreateLecture=async()=>{
   setLoading(true);
   try {
@@ -89,7 +90,7 @@ navigate(`/editcourse/${courseid}`);
  { lectureData?.map((lecture,index)=>{
   return <div key={index} className=' bg-gray-100 rounded-md flex justify-between items-center p-3 text-sm font-medium text-gray-700'>
 <span>Lecture {index+1} : {lecture.lectureTitle}</span>
-<span>  <FaEdit className='text-gray-600 hover:text-blue-600 cursor-pointer' onClick={()=>{navigate(`/editcourse/${course._id}`)}}/></span>
+<span>  <FaEdit className='text-gray-600 hover:text-blue-600 cursor-pointer' onClick={()=>{navigate(`/editlecture/${courseid}/${lecture._id}`)}}/></span>
   </div>
   })}
 {/* </div> */}
