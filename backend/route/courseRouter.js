@@ -3,7 +3,7 @@ import { createCourse, deleteCourse, editCourse, getCourseById, getCreatorCourse
 import isAuth from '../middleware/isAuth.js'
 import upload from '../middleware/multer.js'
 const courseRouter=express.Router();
-
+//course routes
 courseRouter.get('/getcourse/:courseId',isAuth,getCourseById)
 
 courseRouter.delete('/deletecourse/:courseId',isAuth,deleteCourse)
@@ -15,4 +15,9 @@ courseRouter.get('/getcreatorcourse',isAuth,getCreatorCourses)
 courseRouter.get('/getpublishedcourse',getPublishedCourse);
 
 courseRouter.post('/createcourse',isAuth,createCourse)
+
+
+// lecture routes
+
+
 export default courseRouter;
