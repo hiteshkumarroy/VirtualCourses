@@ -164,13 +164,14 @@ const handleRemoveCourse=async()=>{
   <div>
  <button type="submit" className='cursor-pointer text-[12px] bg-black text-white px-3 py-1 active:bg-gray-600 rounded-md'  onClick={(e)=>{
   e.preventDefault();
-
+  navigate(`/createlecture/${selectedCourse?._id}`)
 
  }}> 
 Go to lectures page</button>
 
   </div>
 </div>
+
 
 {/* 2 */}
 <div className='space-y-3 mt-6'>
