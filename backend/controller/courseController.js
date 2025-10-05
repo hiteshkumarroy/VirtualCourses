@@ -159,6 +159,7 @@ return res.status(201).json(course);
 
 export const editLecture=async(req,res)=>{
   try {
+    // console.log("woww");
     const {lectureId}=req.params;
     const {isPreviewFree,lectureTitle}=req.body;
     const lecture=await Lecture.findById(lectureId)
@@ -179,6 +180,7 @@ export const editLecture=async(req,res)=>{
     await lecture.save();
     return res.status(200).json(lecture);
   } catch (error) {
+    console.log(error);
      return res.status(400).json({message:`failed to edit lecture ${error}`}); 
   }
 }
