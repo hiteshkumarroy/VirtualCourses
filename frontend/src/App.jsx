@@ -21,6 +21,7 @@ import { getPublishedCourse } from './customHooks/getPublishedCourse.js'
 import AllCourses from './pages/AllCourses.jsx'
 import CreateLecture from './pages/educator/CreateLecture.jsx'
 import EditLecture from './pages/educator/EditLecture.jsx'
+import ViewCourse from './pages/ViewCourse.jsx'
 
 function App() {
 const user=getCurrentUser();
@@ -54,6 +55,7 @@ const {userData}=useSelector(state=>state.user);
   <Route path='/createlecture/:courseid' element={userData?.role=="educator"?<CreateLecture/>:<Navigate to={'/signup'}/> }/>
 
   <Route path='/editlecture/:courseid/:lectureId' element={userData?.role=="educator"?<EditLecture/>:<Navigate to={'/signup'}/> }/>
+  <Route path='/viewcourse/:courseid' element={userData?.role=="educator"?<ViewCourse/>:<Navigate to={'/signup'}/> }/>
 
 </Routes>
   

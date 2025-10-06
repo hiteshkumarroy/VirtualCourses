@@ -32,7 +32,7 @@ const dispatch=useDispatch();
       
  setLoading(true);
     const response=await axios.post(serverUrl+`/api/course/editlecture/${lectureId}`,formData,{withCredentials:true});
-    console.log(response.data);
+    console.log(response);
     dispatch(setLectureData([...lectureData,response.data]));
     setLoading(false);
     toast.success("lecture edit done")
