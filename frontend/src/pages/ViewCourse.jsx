@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import pic from '../assets/empty.jpg'
-import { FaArrowLeftLong, FaStar } from 'react-icons/fa6';
+import { FaArrowLeftLong, FaSackDollar, FaStar } from 'react-icons/fa6';
 import {FaPlayCircle,FaLock} from 'react-icons/fa'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedCourse } from '../redux/courseSlice';
+import axios from "axios";
+import { serverUrl } from '../App';
+import Card from '../component/Card';
 
 function ViewCourse() {
 const navigate=useNavigate();
@@ -13,6 +16,42 @@ const dispatch=useDispatch();
 const {courseid}=useParams();
 const {selectedCourse}=useSelector(state=>state.course);
 const [selectedLecture,setSelectedLecture]=useState(null)
+const [creatorData,setCreatorData]=useState(null);
+
+const [creatorCourses,setCreatorCourses]=useState([]);
+
+
+useEffect(()=>{
+  const getCreatorCourse=()=>{
+
+    if(creatorData?._id  && publishedCourseData.length>0){
+
+    const courses=publishedCourseData.filter((course)=>{
+      return course.creator===creatorData?._id && courseid!==course._id
+
+    })
+    setCreatorCourses(courses);
+  console.log(courses);
+  }
+
+  }
+  getCreatorCourse();
+},[creatorData,publishedCourseData,selectedCourse])
+
+useEffect(()=>{
+  const findCreator=async()=>{
+try {
+  const creator=await axios.post(serverUrl+'/api/course/creator',{userId:selectedCourse?.creator},{withCredentials:true})
+  console.log(creator?.data);
+  setCreatorData(creator?.data);
+
+} catch (error) {
+  console.log(error);
+}}
+findCreator();
+},[selectedCourse])
+
+
 
 const fetchCourseData=()=>{
 
@@ -128,6 +167,53 @@ setSelectedLecture(lecture);
 
 </div>
 
+</div>
+<div className='mt-8 border-t pt-6'>
+  <h2 className='text-2xl font-semibold mb-2'>
+    Write a review
+  </h2>
+
+<div className='flex gap-1 mb-2'>
+  {
+    [1,2,3,4,5].map((star,index)=>{
+     return <FaStar key={star} className='fill-gray-300'/>
+    })
+  }
+
+</div>
+  <textarea 
+  className='w-full border border-gray-300 rounded-lg p-2 resize-none' 
+  placeholder='Write review here.....'
+  rows={3} /> 
+  <button className=' bg-black text-white mt-3 px-4 py-2 rounded-md hover:bg-gray-800 cursor-pointer'>Submit Review</button>
+</div>
+{/* for creator info */}
+
+<div className='flex items-center gap-4 pt-4 border-t'>
+
+<img className='w-16 h-16 rounded-full object-cover border border-gray-400' src={creatorData?.photoUrl || pic} alt="" />
+
+<div>
+  <h2 className='text-lg font-semibold '>
+    {creatorData?.name}
+  </h2>
+
+  <p className='md:text-sm text-gray-600 text-[10px]'>{creatorData?.description}</p>
+
+  <p className='md:text-sm text-gray-600 text-[10px]'>{creatorData?.email}</p>
+</div>
+</div>
+<div>
+  <p className='text-xl font-semibold mb-2 text-gray-700'>Other Published Corses by the Educator - </p>
+
+</div>
+
+<div className='w-full transition-all duration-300 py-[20px] flex items-start justify-center lg:justify-start flex-wrap gap-6 lg:px-[80px]'>
+{
+  creatorCourses?.map((course,index)=>{
+    return <Card key={index} id={course._id} thumbnail={course.thumbnail} price={course.price} title={course.title} category={course.category} />
+  })
+}
 </div>
     </div>
     </div>

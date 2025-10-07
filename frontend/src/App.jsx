@@ -22,6 +22,7 @@ import AllCourses from './pages/AllCourses.jsx'
 import CreateLecture from './pages/educator/CreateLecture.jsx'
 import EditLecture from './pages/educator/EditLecture.jsx'
 import ViewCourse from './pages/ViewCourse.jsx'
+import ScrollToTop from './component/scrollToTop.jsx'
 
 function App() {
 const user=getCurrentUser();
@@ -34,6 +35,7 @@ const {userData}=useSelector(state=>state.user);
 <>
 
   <ToastContainer/>
+  <ScrollToTop/>
 <Routes>
 
   <Route path='/' element={<Home/>}/>

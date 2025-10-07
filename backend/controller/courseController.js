@@ -1,7 +1,7 @@
 import uploadOnCloudinary from "../config/cloudinary.js";
 import Course from "../model/courseModel.js";
 import Lecture from "../model/lectureModel.js";
-
+import User from "../model/userModel.js"
 
 
 export const createCourse=async (req,res)=>{
@@ -204,3 +204,22 @@ await Course.updateOne({lectures:lectureId},
   }
 }
 
+
+//get creator
+export const getCreatorById=async(req,res)=>{
+ 
+  try{
+     const {userId}=req.body;
+    //  console.log(userId);
+
+const user=await User.findById(userId).select("-password -resetOtp -otpExpires -isOtpVerified");
+
+if(!user){
+return res.status(400).json({message:"user not found"});
+}
+else{
+return res.status(200).json(user);}
+  }catch(error){
+    return res.status(400).json({message:`failed to find user by id ${error}`}); 
+  }
+}
