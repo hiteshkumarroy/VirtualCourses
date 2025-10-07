@@ -8,12 +8,14 @@ import { setSelectedCourse } from '../redux/courseSlice';
 import axios from "axios";
 import { serverUrl } from '../App';
 import Card from '../component/Card';
+import { toast } from 'react-toastify';
 
 function ViewCourse() {
 const navigate=useNavigate();
 const {publishedCourseData}=useSelector(state=>state.course);
 const dispatch=useDispatch();
 const {courseid}=useParams();
+const {userData}=useSelector(state=>state.user);
 const {selectedCourse}=useSelector(state=>state.course);
 const [selectedLecture,setSelectedLecture]=useState(null)
 const [creatorData,setCreatorData]=useState(null);
@@ -21,6 +23,8 @@ const [creatorData,setCreatorData]=useState(null);
 const [creatorCourses,setCreatorCourses]=useState([]);
 
 
+
+//toset creator lectures
 useEffect(()=>{
   const getCreatorCourse=()=>{
 
@@ -38,6 +42,7 @@ useEffect(()=>{
   getCreatorCourse();
 },[creatorData,publishedCourseData,selectedCourse])
 
+//to set creator
 useEffect(()=>{
   const findCreator=async()=>{
 try {
@@ -69,7 +74,51 @@ if(course._id===courseid){
 useEffect(()=>{
   fetchCourseData();
 },[publishedCourseData,courseid]);
-  return (
+  
+
+const handleEnroll=async(courseid,userId)=>{
+try{
+  // console.log("razor")
+  const orderData=await axios.post(serverUrl+'/api/order/razorpay-order',{courseId:courseid,userId:userId},{withCredentials:true});
+
+  const options={
+    key:import.meta.env.VITE_RAZORPAY_KEY_ID,
+    amount:orderData.data.amount,
+    currency:'INR',
+    name:'VIRTUAL COURSES',
+    description:"Course enrollment payment ",
+    order_id:orderData.data.id,
+    handler:async function(response){
+      console.log("Razorpay Response",response);
+      try {
+        const verifyPayment=await axios.post(serverUrl+'/api/order/verifypayment',{
+          ...response,
+          courseId:courseid,
+          userId
+        },{withCredentials:true});
+
+        toast.success(verifyPayment.data.message)
+        
+      } catch (error) {
+        toast.error(error.response.data.message)
+        
+      }
+    }
+  }
+  const razorpayportal=new window.Razorpay(options);
+razorpayportal.open();
+
+console.log(razorpayportal);
+  console.log(orderData);
+}catch(error){
+  console.log(error);
+}
+}
+
+
+
+
+return (
     <div className='minh-h-screen bg-gray-200 p-6'> 
     
     <div className='max-w-6xl mx-auto bg-white shadow-md rounded-xl p-6 space-y-6 relative'>
@@ -100,7 +149,23 @@ useEffect(()=>{
       <p>✅ 10+ hours of video content</p>
       <p>✅ Lifetime access to course materials</p>
     </span>
-<button type="button" className='bg-black text-white px-4 rounded-md py-1 cursor-pointer active:bg-gray-600'> Enroll Now</button>
+<button type="button" className='bg-black text-white px-4 rounded-md py-1 cursor-pointer active:bg-gray-600'
+
+onClick={(e)=>
+ {
+  e.preventDefault() ;
+  try {
+     console.log("hii");
+ handleEnroll(courseid,userData?._id)
+  } catch (error) {
+    console.log(error);
+  }
+ 
+
+}}
+ > 
+ 
+ Enroll Now</button>
   </div>
 </div>
 
@@ -208,6 +273,7 @@ setSelectedLecture(lecture);
 
 </div>
 
+{/* mapping creator courses with cards */}
 <div className='w-full transition-all duration-300 py-[20px] flex items-start justify-center lg:justify-start flex-wrap gap-6 lg:px-[80px]'>
 {
   creatorCourses?.map((course,index)=>{
@@ -215,6 +281,7 @@ setSelectedLecture(lecture);
   })
 }
 </div>
+
     </div>
     </div>
   )

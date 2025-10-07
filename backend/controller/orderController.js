@@ -12,15 +12,16 @@ const RazorPayInstance=new Razorpay({
 
 export const RazorpayOrder=async(req,res)=>{
   try {
+    console.log("razor")
     const {courseId}=req.body
-    const course=await Course.findyById(courseId);
+    const course=await Course.findById(courseId);
     if(!course){
       return res.status(404).json({message:"course not found"});
     }
     const options={
       amount:course.price*100,
       currency:'INR',
-      receipt:`${courseId}.toString()`
+      receipt:`${courseId.toString()}`
     }
     const order=await RazorPayInstance.orders.create(options);
     return res.status(200).json(order);
@@ -34,16 +35,17 @@ export const RazorpayOrder=async(req,res)=>{
 export const verifyPayment=async(req,res)=>{
   
   try {
+    console.log("veriypayment");
     const {courseId,userId,razorpay_order_id}=req.body;
     const OrderInfo=await RazorPayInstance.orders.fetch(razorpay_order_id);
     
     if(OrderInfo.status==='paid'){
-      const user=await User.findyById()
+      const user=await User.findById(userId)
       if(!user.enrolledCourses.includes(courseId)){
         await user.enrolledCourses.push(courseId);
         await user.save();
       }
-      const course=Course.findyById(courseId).populate('lectures');
+      const course=await Course.findById(courseId).populate('lectures');
       
       if(!course.enrolledStudents.includes(userId)){
         await course.enrolledStudents.push(userId);
