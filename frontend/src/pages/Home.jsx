@@ -8,6 +8,7 @@ import Logos from '../component/logos.jsx';
 import ExploreCourses from '../component/ExploreCourses.jsx';
 import CardPage from '../component/CardPage.jsx';
 import { useNavigate } from 'react-router-dom';
+import About from '../component/About.jsx';
  function Home() {
   // console.log("hii");
   const navigate=useNavigate();
@@ -59,6 +60,7 @@ import { useNavigate } from 'react-router-dom';
     <Logos></Logos>
     <ExploreCourses/>
     <CardPage/>
+<About/>
 
       </div>
     
