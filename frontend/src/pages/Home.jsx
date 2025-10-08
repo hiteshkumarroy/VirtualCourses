@@ -9,6 +9,7 @@ import ExploreCourses from '../component/ExploreCourses.jsx';
 import CardPage from '../component/CardPage.jsx';
 import { useNavigate } from 'react-router-dom';
 import About from '../component/About.jsx';
+import Footer from '../component/Footer.jsx';
  function Home() {
   // console.log("hii");
   const navigate=useNavigate();
@@ -61,6 +62,7 @@ import About from '../component/About.jsx';
     <ExploreCourses/>
     <CardPage/>
 <About/>
+<Footer/>
 
       </div>
     

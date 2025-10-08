@@ -12,6 +12,7 @@ import { useDispatch } from 'react-redux';
 import { setUserData } from '../redux/userSlice.js';
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../utils/firebase.js';
+import { FaArrowLeftLong } from 'react-icons/fa6';
 
 function Login() {
 
@@ -65,8 +66,8 @@ toast.error(error.response.data.message);
     return (
       <div className='bg-gray-400 w-[100vw] h-[100vh] flex items-center justify-center '>
   
-  <form className='w-[90%]  md:w-200 h-120 bg-white shadow-xl rounded-2xl flex '>
-  
+  <form className='w-[90%]  md:w-200 h-120 bg-white shadow-xl rounded-2xl flex relative'>
+  <FaArrowLeftLong className='absolute top-5 left-5 cursor-pointer' size={20} onClick={()=>{navigate('/')}}/>
   {/* //leftdiv */}
   <div className=' md:w-[50%] h-[100%] bg-[white] w-[100%] shadow-xl rounded-2xl flex justify-center flex-col items-center gap-3'>
   <div>
