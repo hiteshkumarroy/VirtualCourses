@@ -5,11 +5,12 @@ import {FaPlayCircle,FaLock} from 'react-icons/fa'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedCourse } from '../redux/courseSlice';
-import axios from "axios";
+
 import { serverUrl } from '../App';
 import Card from '../component/Card';
 import { toast } from 'react-toastify';
-
+import axios from 'axios';
+import { ClipLoader } from 'react-spinners';
 function ViewCourse() {
 const navigate=useNavigate();
 const {publishedCourseData}=useSelector(state=>state.course);
@@ -22,7 +23,9 @@ const [creatorData,setCreatorData]=useState(null);
 
 const [creatorCourses,setCreatorCourses]=useState([]);
 const [isEnrolled,setIsEnrolled]=useState(false);
-
+const [rating,setRating]=useState(0);
+const [comment,setComment]=useState("");
+const [loading,setLoading]=useState(false);
 
 
 //toset creator lectures
@@ -136,7 +139,26 @@ useEffect(()=>{
 },[publishedCourseData,courseid,userData]);
   
 
-
+const handleReview=async()=>{
+  try {
+ setLoading(true);
+ const response=await axios.post(serverUrl+'/api/review/createreview',{courseId:courseid,
+  comment,
+  rating
+ },{withCredentials:true});
+ setLoading(false);
+ setRating(0);
+ setComment("");
+ toast.success("review added")
+ console.log(response);
+} catch (error) {
+  setLoading(false);
+   setRating(0);
+ setComment("");
+  console.log(error);
+  toast.error(`failed to add review ${error.response.data.message}`);
+  }
+}
 
 return (
     <div className='minh-h-screen bg-gray-200 p-6'> 
@@ -270,16 +292,23 @@ setSelectedLecture(lecture);
 <div className='flex gap-1 mb-2'>
   {
     [1,2,3,4,5].map((star,index)=>{
-     return <FaStar key={star} className='fill-gray-300'/>
+     return <FaStar key={star} onClick={()=>{setRating(star)}} className={`cursor-pointer ${star<=rating?'fill-yellow-500':'fill-gray-300'}`}/>
     })
   }
 
 </div>
   <textarea 
+  onChange={(e)=>{
+    setComment(e.target.value)
+  }}
+  value={comment}
   className='w-full border border-gray-300 rounded-lg p-2 resize-none' 
   placeholder='Write review here.....'
   rows={3} /> 
-  <button className=' bg-black text-white mt-3 px-4 py-2 rounded-md hover:bg-gray-800 cursor-pointer'>Submit Review</button>
+  <button className=' bg-black text-white mt-3 px-4 py-2 rounded-md hover:bg-gray-800 w-[140px] cursor-pointer' onClick={()=>{
+    handleReview();
+
+  }}>{loading?<ClipLoader size={18} color='white' className='fill-white'/>:"Submit Review"}</button>
 </div>
 {/* for creator info */}
 

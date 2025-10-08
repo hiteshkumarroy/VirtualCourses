@@ -4,6 +4,7 @@ import isAuth from '../middleware/isAuth.js'
 
 
 const reviewRouter=express.Router();
-reviewRouter.post('/createrreview',isAuth,createReview)
+reviewRouter.post('/createreview',isAuth,createReview)
 
-reviewRouter.get('/getReviews',getReviews);
+reviewRouter.get('/getreviews',getReviews);
+export default reviewRouter;
