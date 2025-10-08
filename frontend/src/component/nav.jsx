@@ -93,7 +93,10 @@ setFirstLetter(user.userData.name.slice(0,1).toUpperCase());
     <div className='top-[65px] rounded-2xl absolute w-40 border-2 border-white h-30 flex flex-col items-center justify-evenly'>
       
  <span className='cursor-pointer text-white  border-1 border-white shadow-2xl rounded-lg p-1.5 bg-black'  onClick={()=>{navigate('/profile')}} >My Profile</span>
- <span className='cursor-pointer text-white  border-1 border-white shadow-2xl rounded-lg p-1.5 bg-black'  >My Courses</span>
+ <span className='cursor-pointer text-white  border-1 border-white shadow-2xl rounded-lg p-1.5 bg-black' onClick={()=>{
+  navigate('/mycourses');
+ }
+ }  >My Courses</span>
 
       </div>
 
@@ -169,7 +172,10 @@ setFirstLetter(user.userData.name.slice(0,1).toUpperCase());
 
       
  <span className='cursor-pointer w-30 text-center text-white  border-1 border-white shadow-2xl rounded-lg p-2 bg-black'  onClick={()=>{navigate('/profile')}} >My Profile</span>
- <span className='cursor-pointer w-30 text-center text-white  border-1 border-white shadow-2xl rounded-lg p-2 bg-black'  >My Courses</span>
+ <span className='cursor-pointer w-30 text-center text-white  border-1 border-white shadow-2xl rounded-lg p-2 bg-black' 
+ onClick={()=>{
+  navigate('/mycourses');
+ } }>My Courses</span>
 
 { user && 
 user.userData && 
