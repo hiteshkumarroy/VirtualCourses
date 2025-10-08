@@ -21,6 +21,7 @@ const [selectedLecture,setSelectedLecture]=useState(null)
 const [creatorData,setCreatorData]=useState(null);
 
 const [creatorCourses,setCreatorCourses]=useState([]);
+const [isEnrolled,setIsEnrolled]=useState(false);
 
 
 
@@ -70,11 +71,7 @@ if(course._id===courseid){
   })
 
 }
-
-useEffect(()=>{
-  fetchCourseData();
-},[publishedCourseData,courseid]);
-  
+// to fetch course data and check enrollment
 
 const handleEnroll=async(courseid,userId)=>{
 try{
@@ -98,7 +95,7 @@ try{
         },{withCredentials:true});
 
         toast.success(verifyPayment.data.message)
-        
+        setIsEnrolled(true);
       } catch (error) {
         toast.error(error.response.data.message)
         
@@ -116,6 +113,29 @@ console.log(razorpayportal);
 }
 
 
+const checkEnrollment=()=>{
+
+const verify = userData?.enrolledCourses?.some(c => {
+
+  const id = typeof c === 'string' ? c : c._id;
+  return id.toString() === courseid?.toString();
+});
+  if(verify){
+    console.log("enrolled");
+    setIsEnrolled(true);
+  }
+  else{
+     setIsEnrolled(false);
+  }
+}
+
+
+useEffect(()=>{
+  fetchCourseData();
+  checkEnrollment();
+},[publishedCourseData,courseid,userData]);
+  
+
 
 
 return (
@@ -130,7 +150,7 @@ return (
 
   <FaArrowLeftLong className=' cursor-pointer' onClick={()=>navigate('/')} size={25}  />
 
-  <img src={selectedCourse?.thumbnail || pic } className=' rounded-xl w-full  ' alt="" />
+  <img src={selectedCourse?.thumbnail || pic } className=' rounded-xl w-full max-h-[400px]  ' alt="" />
 
   </div>
 
@@ -149,13 +169,13 @@ return (
       <p>✅ 10+ hours of video content</p>
       <p>✅ Lifetime access to course materials</p>
     </span>
+    {!isEnrolled?
 <button type="button" className='bg-black text-white px-4 rounded-md py-1 cursor-pointer active:bg-gray-600'
 
 onClick={(e)=>
  {
   e.preventDefault() ;
   try {
-     console.log("hii");
  handleEnroll(courseid,userData?._id)
   } catch (error) {
     console.log(error);
@@ -166,6 +186,15 @@ onClick={(e)=>
  > 
  
  Enroll Now</button>
+ :<button type="button" className='bg-green-100 text-green-600 px-4 rounded-md py-1 cursor-pointer '
+
+
+  onClick={()=>{
+    navigate(`/viewlecture/${courseid}`);
+  }}> 
+ 
+ Watch Now</button>
+}
   </div>
 </div>
 
