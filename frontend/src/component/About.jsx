@@ -11,7 +11,7 @@ function About() {
     className='w-[100vw] md:h-[70vh]  min-h-[50vh]  flex md:flex-col flex-wrap items-center justify-center gap-2 mb-[10px] p-5 relative'>
 
       {/* pic */}
-      <div className='lg:w-[40%] md:w-[80%]  w-[100%] h-[100%]  flex items-center justify-center relative '>
+      <div className='lg:w-[40%] md:w-[30%]  w-[100%] h-[100%]  flex items-center justify-center relative '>
 <img src={pic} className='w-[80%] rounded-lg h-[90%]' alt="" />
 
 <div className='absolute max-w-[350px] mx-auto p-4 top-[55%] left-[50%] '><video className='w-full rounded-xl shadow-lg border-2 border-white'  muted autoPlay loop  src={vid}/>

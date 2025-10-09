@@ -120,7 +120,7 @@ ${showSide?"translate-x-0":"-translate-x-full"} md:block md:translate-x-0
 <main className='w-full transition-all duration-300 py-[130px] md:pl-[300px] flex justify-center md:justify-start items-start flex-wrap gap-6 px-[10px]'>
 {
   filteredCourses?.map((c,i)=>{
-    return <Card key={i} thumbnail={c.thumbnail}  title={c.title} category={c.category} price={c.price} id={c._id} />
+    return <Card key={i} thumbnail={c.thumbnail}  title={c.title} category={c.category} price={c.price} id={c._id} reviews={c?.reviews}/>
   })
 }
 </main>

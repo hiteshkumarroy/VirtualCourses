@@ -4,7 +4,7 @@ import { FaArrowLeftLong, FaSackDollar, FaStar } from 'react-icons/fa6';
 import {FaPlayCircle,FaLock} from 'react-icons/fa'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { setSelectedCourse } from '../redux/courseSlice';
+import { setCreatorCourseData, setSelectedCourse } from '../redux/courseSlice';
 
 import { serverUrl } from '../App';
 import Card from '../component/Card';
@@ -12,6 +12,7 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 import { ClipLoader } from 'react-spinners';
 function ViewCourse() {
+  const {creatorCourseData:creatorData}=useSelector(state=>state.course);
 const navigate=useNavigate();
 const {publishedCourseData}=useSelector(state=>state.course);
 const dispatch=useDispatch();
@@ -19,7 +20,7 @@ const {courseid}=useParams();
 const {userData}=useSelector(state=>state.user);
 const {selectedCourse}=useSelector(state=>state.course);
 const [selectedLecture,setSelectedLecture]=useState(null)
-const [creatorData,setCreatorData]=useState(null);
+// const [creatorData,setCreatorData]=useState(null);
 
 const [creatorCourses,setCreatorCourses]=useState([]);
 const [isEnrolled,setIsEnrolled]=useState(false);
@@ -52,7 +53,7 @@ useEffect(()=>{
 try {
   const creator=await axios.post(serverUrl+'/api/course/creator',{userId:selectedCourse?.creator},{withCredentials:true})
   console.log(creator?.data);
-  setCreatorData(creator?.data);
+ dispatch(setCreatorCourseData(creator?.data));
 
 } catch (error) {
   console.log(error);
@@ -160,6 +161,22 @@ const handleReview=async()=>{
   }
 }
 
+const calculateAvgReview=(reviews)=>{
+if(!reviews || reviews.length==0){
+  return 0;
+}
+const total=reviews.reduce((sum,review)=>{
+  
+   sum+=review.rating;
+   return sum;
+},0);
+
+return (total/reviews.length).toFixed(1);
+}
+const avgRating=calculateAvgReview(selectedCourse?.reviews);
+
+console.log("avg rating",avgRating);
+
 return (
     <div className='minh-h-screen bg-gray-200 p-6'> 
     
@@ -180,8 +197,8 @@ return (
     <span className='text-xl font-semibold'>{selectedCourse?.title}</span>
     <span className='font-medium text-[14px] text-gray-500'> {selectedCourse?.subTitle}</span>
     <div className='text-yellow-500 font-medium flex gap-2'>
-      <span className='flex items-center justify-start'><FaStar/>5</span>
-      <span className='text-gray-500'>(1,200 Reviews)</span>
+      <span className='flex items-center justify-start'><FaStar/>{avgRating}</span>
+      <span className='text-gray-500'>({selectedCourse?.reviews?.length} Reviews)</span>
     </div>
     <div className=''>
       <span className='text-xl font-semibold text-black'>₹{selectedCourse?.price || "NA"}</span>

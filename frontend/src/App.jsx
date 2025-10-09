@@ -25,11 +25,13 @@ import ViewCourse from './pages/ViewCourse.jsx'
 import ScrollToTop from './component/scrollToTop.jsx'
 import ViewLecture from './pages/ViewLecture.jsx'
 import MyEnrolledCourses from './pages/MyEnrolledCourses.jsx'
+import getAllReviews from './customHooks/getAllReviews.js'
 
 function App() {
 const user=getCurrentUser();
 getPublishedCourse();
 getCreatorCourse();
+getAllReviews();
 const {userData}=useSelector(state=>state.user);
 
   return (
