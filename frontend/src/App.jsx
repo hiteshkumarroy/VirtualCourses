@@ -5,7 +5,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home.jsx'
 import SignUp from './pages/SignUp.jsx'
 import Login from './pages/Login.jsx'
-export const serverUrl="http://localhost:8000"
+export const serverUrl="https://virtualcourses-566v.onrender.com"
 import {ToastContainer} from 'react-toastify';
 import getCurrentUser from './customHooks/getCurrentUser.js'
 import Profile from './pages/Profile.jsx'
