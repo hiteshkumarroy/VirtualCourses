@@ -21,6 +21,12 @@ function Dashboard() {
         enrolled:course.enrolledStudents?.length || 0}
       })||[]
 
+      const totalEarning=creatorCourseData?.reduce((sum,course)=>{
+        const studentCount=course.enrolledStudents.length||0;
+        const courseRevenue=course.price?course.price*studentCount : 0 ;
+        return sum+courseRevenue;
+
+      },0) || 0; 
        
   return (
     <div className='relative h-[100vh] w-[100vw]  bg-gray-100 '>
@@ -54,8 +60,7 @@ function Dashboard() {
     Welcome, {userData.name} 👋
   </span>
   <span className='font-medium '>
-    Total Earning :  
-    <span className='font-light'> 0</span>
+    Total Earning : <span className='font-semibold text-gray-600'> ₹{totalEarning.toLocaleString()}</span>
   </span>
   <span className='text-gray-700'>
     {userData.description || "start creating courses for your students"}
