@@ -4,7 +4,7 @@ import { BsGooglePlay } from "react-icons/bs";
 import home from '../assets/home.jpg'
 import ai from '../assets/searchAi.png';
 import aiS from '../assets/ai.png';
-import Logos from '../component/logos.jsx';
+import Logos from '../component/Logos.jsx';
 import ExploreCourses from '../component/ExploreCourses.jsx';
 import CardPage from '../component/CardPage.jsx';
 import { useNavigate } from 'react-router-dom';
