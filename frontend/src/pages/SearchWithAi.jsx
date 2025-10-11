@@ -45,7 +45,7 @@ function SearchWithAi() {
   //handling search with query
   const handleRecommendation=async(query)=>{
     try {
-      setListening(true);
+      // setListening(true);
       const result=await axios.post(serverUrl+'/api/course/search',{input:query},{withCredentials:true});
       console.log(result.data);
 setRecommendations(result.data);
@@ -56,12 +56,12 @@ setRecommendations(result.data);
       else{
          speak("no courses found");
       }
-      setListening(false);
+      // setListening(false);
 
 
     } catch (error) {
       console.log(error);
-      setListening(false);
+      // setListening(false);
 
     }
   }
