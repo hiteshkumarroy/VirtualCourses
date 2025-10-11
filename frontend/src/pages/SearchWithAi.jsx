@@ -12,6 +12,7 @@ function SearchWithAi() {
   const navigate=useNavigate();
   const [input,setInput]=useState("");
   const [recommendations,setRecommendations]=useState([]);
+  const [listening,setListening]=useState(false);
 
   // to speak message
   function speak(message){
@@ -30,18 +31,21 @@ function SearchWithAi() {
   //handling voice search converting speech to query
   const handleSearch=async()=>{
     if(!recognition)return;
+      setListening(true);
     recognition.start();
     startSound.play();
     recognition.onresult=async(e)=>{
      const transcript=e.results[0][0].transcript.trim();
      setInput(transcript);
     await handleRecommendation(transcript);
+    setListening(false);
     }
   }
 
   //handling search with query
   const handleRecommendation=async(query)=>{
     try {
+      setListening(true);
       const result=await axios.post(serverUrl+'/api/course/search',{input:query},{withCredentials:true});
       console.log(result.data);
 setRecommendations(result.data);
@@ -52,9 +56,13 @@ setRecommendations(result.data);
       else{
          speak("no courses found");
       }
+      setListening(false);
+
 
     } catch (error) {
       console.log(error);
+      setListening(false);
+
     }
   }
 
@@ -64,7 +72,7 @@ setRecommendations(result.data);
     <div className='min-h-screen bg-gradient-to-br from-black to-gray-800 text-white flex flex-col items-center px-4 py-16'>
 {/* search container */}
 <div className='bg-white shadow-xl rounded-3xl p-6 sm:p-8 w-full max-w-2xl text-center relative'>
-<FaArrowLeftLong className='text-black w-[22px] h-[22px] cursor-pointer absolute'/>
+<FaArrowLeftLong onClick={()=>navigate('/')} className='text-black w-[22px] h-[22px] cursor-pointer absolute'/>
 <h1 className='text-2xl sm:text-3xl font-bold text-gray-600 mb-6 flex items-center justify-center gap-2' >
   <img src={pic} className='w-8 h-8 sm:w-[30px] sm:h-[30px]' alt="" />
   Search With
@@ -90,6 +98,32 @@ setRecommendations(result.data);
   }}><RiMicAiFill className='cursor-pointer w-5 h-5 text-[#cb87c5]'/></button>
 </div>
 </div> 
+{
+recommendations.length>0?(
+
+<div className='w-full max-w-6xl mt-12 px-2 sm:px-4'>
+
+<h1 className='text-xl sm:text-2xl font-semibold mb-6 text-white text-center'>
+
+Ai Search Results
+</h1>
+<div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8'>
+{
+  recommendations?.map((course,index)=>{
+
+return <div key={index} className='bg-white text-black p-5 rounded-2xl shadow-md hover:shadow-indigo-500/30 transition-all duration-300 border border-gray-200 cursor-pointer border:bg-gray-200 cursor hover:bg-gray-200' onClick={()=>{navigate(`/viewcourse/${course._id}`)}}>
+<h2 className='text-lg font-bold sm:text-xl'>{course.title} </h2>
+<p className='text-sm text-gray-600 mt-1'>{course.category}</p>
+</div>
+
+  })
+}
+</div>
+
+
+</div>):(listening?<h1 className='text-center text-xl sm:text-2xl mt-10 text-gray-400'> Listening....</h1>:<h1  className='text-center text-xl sm:text-2xl mt-10 text-gray-400'>No Course Found Yet</h1>)
+
+}
     </div>
   )
 }
