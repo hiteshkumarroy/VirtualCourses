@@ -2,10 +2,26 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeftLong } from "react-icons/fa6";
-
+import {Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis} from 'recharts';
 function Dashboard() {
    const {userData}=useSelector(state=>state.user);
       const navigate=useNavigate();
+      const {creatorCourseData}=useSelector(state=>state.course);
+
+      //for course and lectures chart
+      const CourseProgressData=creatorCourseData?.map((course)=>{
+        return { name:course.title?.slice(0,10)+"...",
+          lectures:course.lectures?.length || 0}
+        })||[]
+        
+
+        //for course and enrolled students chart
+      const enrolledData=creatorCourseData?.map((course)=>{
+      return { name:course.title?.slice(0,10)+"...",
+        enrolled:course.enrolledStudents?.length || 0}
+      })||[]
+
+       
   return (
     <div className='relative h-[100vh] w-[100vw]  bg-gray-100 '>
    
@@ -53,9 +69,37 @@ function Dashboard() {
 
 
         {/* graph section */}
-        <div>
+        <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 p-4 gap-8'>
+
+        {/* for course progress graph */}
+        <div className='bg-white rounded-lg shadow-2xl p-6 '>
+          <h2 className='text-lg font-semibold mb-4 '>Course Progress (Lectures)</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={CourseProgressData}>
+<CartesianGrid strokeDasharray="3 3"/>
+<XAxis dataKey="name"/>
+<YAxis/>
+<Tooltip/>
+<Bar dataKey="lectures" fill='black' radius={[5,5,0,0]}/>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
 
 
+        {/* for enrolled data*/}
+        <div className='bg-white rounded-lg shadow-2xl p-6 '>
+          <h2 className='text-lg font-semibold mb-4 '>Students Enrollment</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={enrolledData}>
+<CartesianGrid strokeDasharray="3 3"/>
+<XAxis dataKey="name"/>
+<YAxis/>
+<Tooltip/>
+<Bar dataKey="enrolled" fill='black' radius={[5,5,0,0]}/>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+        
         </div>
 
       </div>

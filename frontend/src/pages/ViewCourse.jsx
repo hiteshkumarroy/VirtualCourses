@@ -352,7 +352,7 @@ setSelectedLecture(lecture);
 <div className='w-full transition-all duration-300 py-[20px] flex items-start justify-center lg:justify-start flex-wrap gap-6 lg:px-[80px]'>
 {
   creatorCourses?.map((course,index)=>{
-    return <Card key={index} id={course._id} thumbnail={course.thumbnail} price={course.price} title={course.title} category={course.category} />
+    return <Card key={index} id={course._id} thumbnail={course.thumbnail} price={course.price} title={course.title} category={course.category} reviews={course.reviews}/>
   })
 }
 </div>

@@ -90,7 +90,7 @@ setFirstLetter(user.userData.name.slice(0,1).toUpperCase());
 
   {
     showPcard && 
-    <div className='top-[65px] rounded-2xl absolute w-40 border-2 border-white h-30 flex flex-col items-center justify-evenly'>
+    <div className='top-[65px] rounded-2xl absolute w-40 border-2 border-white bg-black h-30 flex flex-col items-center justify-evenly'>
       
  <span className='cursor-pointer text-white  border-1 border-white shadow-2xl rounded-lg p-1.5 bg-black'  onClick={()=>{navigate('/profile')}} >My Profile</span>
  <span className='cursor-pointer text-white  border-1 border-white shadow-2xl rounded-lg p-1.5 bg-black' onClick={()=>{
@@ -145,6 +145,9 @@ setFirstLetter(user.userData.name.slice(0,1).toUpperCase());
       
         alt="User Avatar"
       />
+
+
+
     ) : (
       <span
         className='cursor-pointer inline-flex items-center justify-center  w-15 h-15 text-white border border-white shadow-2xl rounded-full hover:bg-gray-800 bg-black'
