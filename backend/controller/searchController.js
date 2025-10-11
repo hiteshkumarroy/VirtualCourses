@@ -6,7 +6,7 @@ export const searchWithAi=async(req,res)=>{
 if(!input){
   return res.status(400).json({message:"Search query is required"});
 }
-const courses =Course.find({isPublished:true,
+const courses =await Course.find({isPublished:true,
   $or:[
     {title:{$regex:input ,$options:'i'}},
     {subTitle:{$regex:input ,$options:'i'}},
