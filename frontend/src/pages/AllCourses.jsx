@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Nav from '../component/nav';
 import { FaArrowLeftLong } from 'react-icons/fa6';
 import { useNavigate } from 'react-router-dom';
-import pic from '../assets/searchAi.png'
+import pic from '../assets/SearchAi.png'
 import { PiCableCar } from 'react-icons/pi';
 import { useSelector } from 'react-redux';
 import Card from '../component/Card';
