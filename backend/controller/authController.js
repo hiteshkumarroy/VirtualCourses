@@ -31,8 +31,8 @@ const token=await gentoken(user._id);
 
 res.cookie("token",token,{
   httpOnly:true,
-  secure:false,
-  sameSite:"strict",
+  secure:true,
+  sameSite:"none",
   maxAge:7*24*60*60*1000
 })
 return res.status(201).json(user);
@@ -60,8 +60,8 @@ export const login=async(req,res)=>{
 
     res.cookie("token",token,{
         httpOnly:true,
-  secure:false,
-  sameSite:"strict",
+  secure:true,
+  sameSite:"none",
   maxAge:7*24*60*60*1000
     })
     console.log(token);
@@ -157,8 +157,8 @@ console.log(user);
 
     res.cookie("token",token,{
         httpOnly:true,
-  secure:false,
-  sameSite:"strict",
+  secure:true,
+  sameSite:"none",
   maxAge:7*24*60*60*1000
     })
 
