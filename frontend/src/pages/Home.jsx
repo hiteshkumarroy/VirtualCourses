@@ -49,7 +49,9 @@ import ReviewPage from '../component/ReviewPage.jsx';
       </button>
       <button className='border-1 flex lg:bg-black bg-black text-white gap-2 justify-center items-center cursor-pointer lg:border-white border-black hover:text-black hover:bg-white rounded-md px-[10px] lg:hover:text-black lg:hover:bg-white  py-[8px]'
       onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}>Search With Ai
+      onMouseLeave={handleMouseLeave} onClick={()=>{
+        navigate('/search')
+      }}>Search With Ai
         <img src={imageSrc} className='inline  hover:fill-black' width={25}
          
          />

@@ -71,7 +71,9 @@ ${showSide?"translate-x-0":"-translate-x-full"} md:block md:translate-x-0
   Filter by Category</h2>
   <form action="" onSubmit={(e)=>e.preventDefault()} className='bg-gray-600 mt-5 text-white rounded-2xl border-1 border-white space-y-2 pb-4'>
 
-    <button className='bg-black cursor-pointer gap-2 flex p-2 rounded-xl ml-4 mt-4'>Search with AI <img src={pic} width={"25px"} alt="" /></button>
+    <button className='bg-black cursor-pointer gap-2 flex p-2 rounded-xl ml-4 mt-4' onClick={()=>{
+        navigate('/search')
+      }}>Search with AI <img src={pic} width={"25px"} alt="" /></button>
 <div className='text-[14px] ml-5 flex gap-2'>
 <input type="checkbox" id='appdev' onChange={toggleCategory} value={"App Development"} className='cursor-pointer accent-black'/>
 <label htmlFor="appdev" className='cursor-pointer'>App Development</label>
