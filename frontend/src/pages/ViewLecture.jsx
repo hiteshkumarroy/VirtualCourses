@@ -85,7 +85,7 @@ console.log(selectedLecture)
 </div>
 
   <div className='flex flex-col    '>
-    <span className='font-medium'>{creatorData?.name ||'Ankush sahu'}</span>
+    <span className='font-medium'>{creatorData?.name ||'Hitesh Roy'}</span>
     <span className='text-gray-500 text-[14px]'>{creatorData?.description || "CSE student"}</span>
     <span className='text-gray-500 text-[14px]'>{creatorData?.email || "CSE student"}</span>
   </div>
