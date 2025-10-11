@@ -6,10 +6,20 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { serverUrl } from '../App';
+import start from '../assets/start.mp3'
 function SearchWithAi() {
+  const startSound=new Audio(start);
   const navigate=useNavigate();
   const [input,setInput]=useState("");
   const [recommendations,setRecommendations]=useState([]);
+
+  // to speak message
+  function speak(message){
+    let utterance=new SpeechSynthesisUtterance(message);
+    window.speechSynthesis.speak(utterance);
+  }
+
+  // creating speech instance
   const SpeechRecognition=window.SpeechRecognition || window.webkitSpeechRecognition || window.SpeechRecognitionAlternative;
 
   const recognition=new SpeechRecognition();
@@ -17,24 +27,38 @@ function SearchWithAi() {
     toast.error("Speech recognition not supported");
   }
 
+  //handling voice search converting speech to query
   const handleSearch=async()=>{
     if(!recognition)return;
     recognition.start();
+    startSound.play();
     recognition.onresult=async(e)=>{
      const transcript=e.results[0][0].transcript.trim();
      setInput(transcript);
     await handleRecommendation(transcript);
     }
   }
+
+  //handling search with query
   const handleRecommendation=async(query)=>{
     try {
       const result=await axios.post(serverUrl+'/api/course/search',{input:query},{withCredentials:true});
       console.log(result.data);
 setRecommendations(result.data);
+
+      if(result.data.length>0){
+        speak("These are the top courses I found for you");
+      }
+      else{
+         speak("no courses found");
+      }
+
     } catch (error) {
       console.log(error);
     }
   }
+
+
 
   return (
     <div className='min-h-screen bg-gradient-to-br from-black to-gray-800 text-white flex flex-col items-center px-4 py-16'>
