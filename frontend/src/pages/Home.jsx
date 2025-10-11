@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Nav from '../component/nav.jsx'
 import { BsGooglePlay } from "react-icons/bs";
 import home from '../assets/home.jpg'
-import ai from '../assets/searchAi.png';
+import ai from '../assets/SearchAi.png';
 import aiS from '../assets/ai.png';
 import Logos from '../component/Logos.jsx';
 import ExploreCourses from '../component/ExploreCourses.jsx';
