@@ -16,9 +16,11 @@ A full-featured E-Learning platform with **AI-powered course discovery**, **secu
 
 ## 🚀 Live Demo
 [VirtualCourses](https://virtualcourses-2.onrender.com/)
-(screenshots available in ./frontend/public folder)
-
 ---
+
+####(screenshots available in ./frontend/public folder)
+
+
 
 
 ## ✨ Key Features
