@@ -79,7 +79,7 @@ className='bg-black cursor-pointer text-white p-1 rounded-md w-[100%]'
 onClick={(e)=>{e.preventDefault()
   handleSendOtp();
 }} >
-  Send OTP</button>
+  {loading?<ClipLoader size={20} color={"white"}/>:"Send OTP"}</button>
   <div className='text-center hover:bg-black hover:text-white cursor-pointer rounded-md p-1' onClick={()=>{navigate('/login')}}>Back to Login</div>
 
 </form>
@@ -98,7 +98,7 @@ className='bg-black cursor-pointer text-white p-1 rounded-md w-[100%]'
 onClick={(e)=>{e.preventDefault()
   handleVerifyOtp();
 }}>
-  Verify OTP</button>
+  {loading?<ClipLoader size={20} color={"white"}/>:"Verify OTP"}</button>
   <div className='text-center hover:bg-black hover:text-white cursor-pointer rounded-md p-1' onClick={()=>{navigate('/login')}}>Back to Login</div>
 
 </form>
@@ -125,7 +125,7 @@ className='bg-black text-white cursor-pointer p-1 rounded-md w-[100%]'
 onClick={(e)=>{e.preventDefault()
   handleResetPass();
 }}>
-  Reset Password</button>
+  {loading?<ClipLoader size={20} color={"white"}/>:" Reset Password"}</button>
 
   <div className='text-center hover:bg-black hover:text-white cursor-pointer rounded-md p-1' onClick={()=>{navigate('/login')}}>Back to Login</div>
 
